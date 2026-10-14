@@ -1,0 +1,6 @@
+,n,accuracy,log_loss,brier
+Régression logistique (événements),1112.0,0.4991,1.037,0.6189
+XGBoost (événements),1112.0,0.4703,1.0777,0.6407
+Régression logistique (Elo seul),1112.0,0.5108,0.9871,0.5884
+Modèle v5 (hors échantillon),1112.0,0.5216,0.974,0.5804
+Cotes des bookmakers,1111.0,0.5248,0.9699,0.5776

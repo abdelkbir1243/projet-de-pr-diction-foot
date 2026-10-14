@@ -1,0 +1,7 @@
+comparaison,Δ log loss ×1e3,IC bas,IC haut,significatif
+E7 Ensemble sport calibré − E0 Goalgebra v5 (logit),1.2149075182186257,0.11624612749211541,2.3302672145108616,oui
+E3 CatBoost (sport) − E0 Goalgebra v5 (logit),2.6868014033042824,0.6986636118855032,4.662481801202039,oui
+E2 Dixon-Coles (buts) − E0 Goalgebra v5 (logit),1.2527089469678552,-0.18766985849906584,2.6333775889217192,non
+E0 Goalgebra v5 (logit) − Elo seul,-3.3526271002602472,-6.156504266894706,-0.528183004776354,oui
+E6 Sport + marché (empilement) − E5 Marché seul (Shin),0.17769655540541027,-0.5841310687742541,0.9072841395503494,non
+E7 Ensemble sport calibré − E5 Marché seul (Shin),11.818509657950905,8.805562260298055,14.851606595557644,oui

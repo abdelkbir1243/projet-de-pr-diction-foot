@@ -1,0 +1,25 @@
+data/*.csv
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.pytest_cache/
+*.egg-info/
+.venv/
+venv/
+
+# agrégat StatsBomb (régénérable avec scripts/sb_agg.py)
+data/statsbomb_*.pkl
+
+# cache des coupes d'Europe (openfootball)
+data/coupes/
+
+# secrets locaux Streamlit
+.streamlit/secrets.toml
+
+# plateforme serveur
+deploy/.env
+deploy/sauvegardes/
+data/*.db
+
+# banc d essai (régénérable : scripts/banc_generer.py)
+data/banc_*.pkl

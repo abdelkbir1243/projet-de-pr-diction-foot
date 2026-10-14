@@ -1,0 +1,13 @@
+.git
+**/__pycache__
+.pytest_cache
+web/node_modules
+web/.next
+data/*.csv
+data/*.pkl
+data/coupes
+data/*.db
+notebooks
+journal
+.env
+.streamlit/secrets.toml

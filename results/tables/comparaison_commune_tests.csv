@@ -1,0 +1,5 @@
+comparaison,Δ log loss ×1e3,IC bas,IC haut,significatif
+v5 − v4,-0.21,-1.07,0.57,False
+v4 − v3,-0.4,-1.55,0.77,False
+v5 − Elo seul,-4.2,-6.55,-1.78,True
+v5 − Cotes,9.98,7.27,12.81,True

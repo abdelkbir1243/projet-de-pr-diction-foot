@@ -1,0 +1,21 @@
+,même match,avant le match
+sot,0.3774,0.2077
+sot_pct,0.3618,0.0783
+xg,0.3521,0.201
+pass_pct,0.1299,0.1494
+shots,0.1147,0.2026
+carries,0.0852,0.1942
+field_tilt,0.077,0.1968
+xt,0.0741,0.2088
+events,0.0702,0.1949
+passes,0.0692,0.2012
+ev_def3,0.0459,0.0308
+passes_att3,0.0434,0.193
+dribble_pct,0.041,0.0584
+possession,0.0344,0.179
+dribbles,0.016,0.0795
+dist_goal,0.0108,-0.0537
+ev_box,0.0002,0.215
+ev_att3,-0.0028,0.2007
+carry_len,-0.0836,-0.1027
+pass_len,-0.0853,-0.1006

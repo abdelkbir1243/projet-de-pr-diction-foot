@@ -1,0 +1,5 @@
+,n,accuracy,log_loss,brier
+SVM linéaire,311.0,0.6527,0.8068,0.4721
+Random Forest,311.0,0.6238,0.8312,0.4876
+XGBoost,311.0,0.6527,0.7775,0.4602
+Régression logistique,311.0,0.6463,0.7639,0.4484

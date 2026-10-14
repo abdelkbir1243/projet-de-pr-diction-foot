@@ -1,0 +1,50 @@
+# Publie les données de la plateforme web (web/data/*.json) : calendrier, prédictions figées avant les matchs, classements,
+# performances, cotes. Sources réelles uniquement (footpred/sources.py) :
+#   - football-data.co.uk (sans clé) : résultats récents avec statistiques, calendrier des prochains jours et cotes ;
+#   - football-data.org (clé gratuite, secret FOOTBALL_DATA_API_KEY, facultatif) : statuts et scores en direct ;
+#   - openfootball (GitHub, sans clé) : calendrier complet et scores, en secours.
+# Chaque publication met à jour l'application Streamlit (et le site Vercel s'il est utilisé).
+name: Publier les données
+
+on:
+  schedule:
+    - cron: "7 */2 * * *"        # toutes les 2 heures (UTC)
+  workflow_dispatch: {}          # bouton « Run workflow » dans l'onglet Actions
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publier-donnees
+  cancel-in-progress: false
+
+jobs:
+  publier:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements-pipeline.txt
+      - run: pip install -r requirements-pipeline.txt
+      - name: Calculer les prédictions et exporter le JSON
+        env:
+          FOOTBALL_DATA_API_KEY: ${{ secrets.FOOTBALL_DATA_API_KEY }}   # facultatif : sans clé, calendrier football-data.co.uk
+          GOALGEBRA_SOURCES: ${{ vars.GOALGEBRA_SOURCES }}             # facultatif : ordre des sources de calendrier
+        run: python -m footpred.web --sortie web/data
+      - name: Commit si les données ont changé
+        run: |
+          git config user.name "goalgebra-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add web/data
+          git diff --cached --quiet && echo "Aucun changement" && exit 0
+          # seul meta.json (horodatage) a changé : pas de commit, sauf toutes les 5 h pour attester que les données sont vérifiées
+          if git diff --cached --quiet -- . ':(exclude)web/data/meta.json'; then
+            AGE=$(git show HEAD:web/data/meta.json | python -c "import json,sys,datetime as d; m=json.load(sys.stdin); print(int((d.datetime.now(d.timezone.utc)-d.datetime.fromisoformat(m['generatedAt'])).total_seconds()//3600))" || echo 99)
+            if [ "$AGE" -lt 5 ]; then echo "Seul meta.json a changé (dernière publication il y a ${AGE} h)"; git reset -q; exit 0; fi
+          fi
+          git commit -m "données : mise à jour $(date -u +'%Y-%m-%d %H:%M') UTC"
+          git push

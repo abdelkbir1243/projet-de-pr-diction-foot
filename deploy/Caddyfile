@@ -1,0 +1,44 @@
+# Proxy HTTPS : certificats Let's Encrypt automatiques, redirection HTTP → HTTPS, en-têtes de sécurité.
+{
+	email {$EMAIL_ACME}
+	servers {
+		timeouts {
+			read_header 10s
+		}
+	}
+}
+
+(securite) {
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		Permissions-Policy "camera=(), microphone=(), geolocation=()"
+		-Server
+	}
+	encode zstd gzip
+	log {
+		output stdout
+		format json
+	}
+}
+
+# Application (Streamlit, WebSocket inclus)
+{$DOMAINE} {
+	import securite
+	header X-Frame-Options "SAMEORIGIN"
+	request_body {
+		max_size 2MB
+	}
+	reverse_proxy app:8501
+}
+
+# API publique
+{$DOMAINE_API} {
+	import securite
+	header X-Frame-Options "DENY"
+	request_body {
+		max_size 64KB
+	}
+	reverse_proxy api:8000
+}

@@ -1,0 +1,11 @@
+,valeur
+log loss v4 ré-entraîné chaque semaine,0.9905848121179486
+log loss v4 figé,0.9901825177528498
+log loss cotes,0.9802378799690777
+gain ré-entraînement ×1e3,0.4022943650987782
+IC bas,-0.23000137981999078
+IC haut,1.006563021307765
+écart v4 − cotes ×1e3,10.34693214887089
+IC bas (cotes),3.6358647868812324
+IC haut (cotes),17.126232961706915
+semaines où v4 bat les cotes,0.43243243243243246

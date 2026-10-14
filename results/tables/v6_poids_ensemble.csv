@@ -1,0 +1,6 @@
+saison test,E0 Goalgebra v5 (logit) · log(P1/PX),E1 Logistique Elo + forme · log(P1/PX),E2 Dixon-Coles (buts) · log(P1/PX),E3 CatBoost (sport) · log(P1/PX)
+2021,0.324,0.199,0.513,-0.008
+2022,0.408,0.134,0.471,0.029
+2023,0.312,0.294,0.492,-0.022
+2024,0.423,0.238,0.383,0.01
+2025,0.459,0.113,0.494,-0.009
